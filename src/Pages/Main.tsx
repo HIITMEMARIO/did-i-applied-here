@@ -77,8 +77,8 @@ const Main = ({ userId }: { userId: string | null }) => {
 
   return (
     <>
-      <button onClick={logOutHandler}>카카오 로그아웃</button>
       <StMainWrapper>
+        <StLogOutButton onClick={logOutHandler}>로그아웃</StLogOutButton>
         <h1>
           내가 여기 넣었나?
           <span>
@@ -94,7 +94,7 @@ const Main = ({ userId }: { userId: string | null }) => {
             value={company}
             onChange={companyHandler}
           />
-          <button type="submit">등록하기</button>
+          <StLogOutButton type="submit">등록하기</StLogOutButton>
         </form>
         <StCardWrapper>
           {user?.map((i) => {
@@ -115,6 +115,21 @@ const StCardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 30px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+const StLogOutButton = styled.button`
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  background-color: #9cb4d4;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px;
 `;
 
 const StMainWrapper = styled.div`
@@ -159,5 +174,34 @@ const StMainWrapper = styled.div`
     cursor: pointer;
     border-radius: 20px;
     border: none;
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 40px;
+      span {
+        font-size: 20px;
+        width: 330px;
+        word-break: break-word;
+        line-height: 30px;
+      }
+    }
+    h2 {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      /* background-color: red; */
+      display: flex;
+      align-items: center;
+
+      input {
+        width: 200px;
+        margin-right: 20px;
+      }
+    }
   }
 `;

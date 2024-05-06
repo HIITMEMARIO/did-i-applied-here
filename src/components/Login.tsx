@@ -56,6 +56,18 @@ const StMainWrapper = styled.div`
     border: none;
     margin-right: 50px;
   }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 40px;
+      span {
+        font-size: 20px;
+        width: 330px;
+        word-break: break-word;
+        line-height: 30px;
+      }
+    }
+  }
 `;
 const StButton = styled.button`
   border: none;

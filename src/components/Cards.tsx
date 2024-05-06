@@ -63,4 +63,7 @@ const StCardWrapper = styled.div`
     position: absolute;
     right: 10px;
   }
+
+  @media screen and (max-width: 768px) {
+  }
 `;

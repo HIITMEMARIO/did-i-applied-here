@@ -4,6 +4,8 @@ import { supabase } from './shared/supabase/supabase';
 import { logInUser } from './redux/modules/authSlice';
 import { RootState } from './redux/config/configStore';
 import Router from './route/Router';
+import { CircularProgress } from '@mui/material';
+import styled from 'styled-components';
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
@@ -66,7 +68,12 @@ function App() {
     })();
   }, []);
 
-  if (isLoading) return <div>Loading...!</div>;
+  if (isLoading)
+    return (
+      <StContainer>
+        <CircularProgress color="success" />
+      </StContainer>
+    );
 
   return (
     <>
@@ -76,3 +83,10 @@ function App() {
 }
 
 export default App;
+
+const StContainer = styled.div`
+  height: 93vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
