@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { supabase } from './shared/supabase/supabase';
 import { logInUser } from './redux/modules/authSlice';
-import { RootState } from './redux/config/configStore';
 import Router from './route/Router';
 import { CircularProgress } from '@mui/material';
 import styled from 'styled-components';
 
 function App() {
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
-
-  console.log(isLoggedIn);
 
   /* 일단 signInWithKakao 함수가 실행됐을때 이 useEffect는 실행이 안됨 이 말은 authSlice에서 상태를 변경시키지 않는 다는말
   그렇다면  */

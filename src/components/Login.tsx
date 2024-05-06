@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { signInWithKakao } from '../api/auth';
 
 const Login = () => {
-  console.log('로그인 컴포넌트 렌더링됨');
-
   return (
     <StMainWrapper>
       <h1>

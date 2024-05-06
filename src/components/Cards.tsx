@@ -30,7 +30,7 @@ const Cards = ({ company, id }: CardProps) => {
   return (
     <StCardWrapper>
       <div>{company}</div>
-      <button onClick={handleDelete}>지원취소</button>
+      <StButton onClick={handleDelete}>지원취소</StButton>
     </StCardWrapper>
   );
 };
@@ -58,12 +58,24 @@ const StCardWrapper = styled.div`
     overflow: hidden;
   }
 
-  button {
-    width: 80px;
-    position: absolute;
-    right: 10px;
+  @media screen and (max-width: 768px) {
   }
+`;
+
+const StButton = styled.button`
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  background-color: aliceblue;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px;
 
   @media screen and (max-width: 768px) {
+    color: aliceblue;
+    width: 120px;
+    background-color: aliceblue;
+    color: black;
   }
 `;

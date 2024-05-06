@@ -78,7 +78,7 @@ const Main = ({ userId }: { userId: string | null }) => {
   return (
     <>
       <StMainWrapper>
-        <StLogOutButton onClick={logOutHandler}>로그아웃</StLogOutButton>
+        <StButton onClick={logOutHandler}>로그아웃</StButton>
         <h1>
           내가 여기 넣었나?
           <span>
@@ -94,11 +94,10 @@ const Main = ({ userId }: { userId: string | null }) => {
             value={company}
             onChange={companyHandler}
           />
-          <StLogOutButton type="submit">등록하기</StLogOutButton>
+          <StButton type="submit">등록하기</StButton>
         </form>
         <StCardWrapper>
           {user?.map((i) => {
-            console.log(i);
             return <Cards key={i.id} company={i.company} id={i.id} />;
           })}
         </StCardWrapper>
@@ -121,7 +120,7 @@ const StCardWrapper = styled.div`
   }
 `;
 
-const StLogOutButton = styled.button`
+const StButton = styled.button`
   width: 100px;
   height: 50px;
   border-radius: 20px;
@@ -130,6 +129,11 @@ const StLogOutButton = styled.button`
   font-size: 20px;
   cursor: pointer;
   margin: 10px;
+
+  @media screen and (max-width: 768px) {
+    color: aliceblue;
+    width: 120px;
+  }
 `;
 
 const StMainWrapper = styled.div`
@@ -168,14 +172,14 @@ const StMainWrapper = styled.div`
     margin-right: 50px;
   }
 
-  button {
+  /* button {
     width: 100px;
     height: 50px;
     cursor: pointer;
     border-radius: 20px;
     border: none;
     font-size: 18px;
-  }
+  } */
 
   @media screen and (max-width: 768px) {
     h1 {
