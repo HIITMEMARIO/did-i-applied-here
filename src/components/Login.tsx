@@ -75,10 +75,6 @@ const StButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media screen and (max-width: 768px) {
-    margin-bottom: 200px;
-  }
 `;
 
 const StImg = styled.img`
