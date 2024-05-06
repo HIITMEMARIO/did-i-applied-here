@@ -26,6 +26,7 @@ const StMainWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 93vh;
 
   h1 {
     font-size: 100px;
