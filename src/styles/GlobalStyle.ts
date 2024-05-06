@@ -45,7 +45,7 @@ export const GlobalStyle = createGlobalStyle`
     /* font-size: 100%; */
     vertical-align: baseline;
     box-sizing: border-box;
-    background-color: #cfd0d1;
+    background-color: #e9f2eb;
     font-family: "subset-NanumSquareRoundB"
   }
   /* HTML5 display-role reset for older browsers */

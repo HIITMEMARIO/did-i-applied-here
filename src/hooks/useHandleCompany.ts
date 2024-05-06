@@ -1,32 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addCompany } from '../api/company';
 import Swal from 'sweetalert2';
-import { addDataDataType } from '../types/addDataType';
-import { getUserDataById } from '../api/auth';
+// import { addDataDataType } from '../types/addDataType';
+import { deleteData, getUserDataById } from '../api/auth';
 
 interface Props {
   company: string | null;
-  setCompany: React.Dispatch<React.SetStateAction<string>>;
   userId: string | null;
 }
 
-export const useHandleCompany = ({ company, setCompany, userId }: Props) => {
+export const useHandleCompany = ({ company, userId }: Props) => {
   const queryClient = useQueryClient();
-  const success = ({ newCompany }: { newCompany: addDataDataType }) => {
-    Swal.fire({
-      icon: 'question',
-      text: `${company}이름으로 등록하시겠습니까?`,
-      showCancelButton: true,
-      confirmButtonText: '예',
-      cancelButtonText: '아니오',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        addCompanymutation.mutate(newCompany);
-      } else if (result.isDismissed) {
-        setCompany('');
-      }
-    });
-  };
 
   const { data: user } = useQuery({
     queryKey: ['user', userId],
@@ -51,5 +35,22 @@ export const useHandleCompany = ({ company, setCompany, userId }: Props) => {
     },
   });
 
-  return { addCompanymutation, success, user };
+  const deleteCompanymutation = useMutation({
+    mutationFn: deleteData,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user', userId] });
+      Swal.fire({
+        icon: 'success',
+        text: `${company}삭제되었습니다!`,
+      });
+    },
+    onError: () => {
+      Swal.fire({
+        icon: 'error',
+        text: '오류입니다! 삭제되지 않았어요!',
+      });
+    },
+  });
+
+  return { addCompanymutation, deleteCompanymutation, user };
 };

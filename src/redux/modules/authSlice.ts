@@ -11,15 +11,16 @@ const session = JSON.parse(
     import.meta.env.VITE_LOCALSTORAGE_KEY as string
   ) as string
 );
+console.log(session);
 
 const isLocalStorage = !!localStorage.getItem(
   import.meta.env.VITE_LOCALSTORAGE_KEY as string
 );
 
 const initialState: initialStateType = {
-  isLoggedIn: isLocalStorage ? true : false,
-  userId: isLocalStorage ? session.user.id : null,
-  email: isLocalStorage ? session.user.email : null,
+  isLoggedIn: false,
+  userId: '',
+  email: '',
 };
 
 console.log(isLocalStorage);

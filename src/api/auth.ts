@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { supabase } from '../shared/supabase/supabase';
 
 export async function signInWithKakao() {
@@ -6,8 +5,14 @@ export async function signInWithKakao() {
     provider: 'kakao',
     options: {
       redirectTo: import.meta.env.VITE_REDIRECT_TO,
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent',
+      },
     },
   });
+
+  console.log(data);
 
   if (error) throw error.message;
 }
@@ -27,4 +32,11 @@ export const getUserDataById = async (userId: string | null) => {
     throw error;
   }
   return user;
+};
+
+export const deleteData = async (id: string) => {
+  const { error } = await supabase.from('companies').delete().eq('id', id);
+  if (error) {
+    throw error.message;
+  }
 };
