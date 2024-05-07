@@ -4,7 +4,6 @@ import Main from '../Pages/Main';
 import Login from '../components/Login';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/config/configStore';
-import LoginProtectedRoute from '../components/LoginProtectedRoute';
 
 export default function Router() {
   const { userId } = useSelector((state: RootState) => state.auth);
