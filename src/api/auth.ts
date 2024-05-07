@@ -1,7 +1,7 @@
 import { supabase } from '../shared/supabase/supabase';
 
 export async function signInWithKakao() {
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: 'kakao',
     options: {
       redirectTo: import.meta.env.VITE_REDIRECT_TO,
@@ -11,8 +11,6 @@ export async function signInWithKakao() {
       },
     },
   });
-
-  console.log(data);
 
   if (error) throw error.message;
 }
