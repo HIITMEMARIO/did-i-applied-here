@@ -62,7 +62,7 @@ function App() {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [dispatch]);
 
   if (isLoading)
     return (
