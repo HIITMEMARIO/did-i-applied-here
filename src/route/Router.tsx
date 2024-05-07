@@ -14,9 +14,10 @@ export default function Router() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Main userId={userId} />} />
           <Route path="*" element={<Navigate replace to="/" />} />
+          <Route path="/login" element={<Navigate replace to="/" />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate replace to="/login" />} />
+        {/* <Route path="*" element={<Navigate replace to="/login" />} /> */}
       </Routes>
     </BrowserRouter>
   );
