@@ -5,8 +5,8 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const LoginProtectedRoute = () => {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
-
-  return !isLoggedIn ? <Outlet /> : <Navigate to={'/login'} replace />;
+  console.log('asdafd', isLoggedIn);
+  return !isLoggedIn ? <Outlet /> : <Navigate to={'/'} replace />;
 };
 
 export default LoginProtectedRoute;

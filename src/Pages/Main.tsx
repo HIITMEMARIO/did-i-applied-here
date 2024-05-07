@@ -7,12 +7,16 @@ import Swal from 'sweetalert2';
 import { signOut } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 import Cards from '../components/Cards';
+import { logOutUser } from '../redux/modules/authSlice';
+import { useDispatch } from 'react-redux';
 
 const Main = ({ userId }: { userId: string | null }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logOutHandler = () => {
     signOut();
+    dispatch(logOutUser());
     navigate('/login');
   };
   const [company, setCompany] = useState<string>('');
@@ -30,7 +34,7 @@ const Main = ({ userId }: { userId: string | null }) => {
   const success = ({ newCompany }: { newCompany: addDataDataType }) => {
     Swal.fire({
       icon: 'question',
-      text: `${newCompany.company}이름으로 등록하시겠습니까?`,
+      text: `"${newCompany.company}" 로 등록하시겠습니까?`,
       showCancelButton: true,
       confirmButtonText: '예',
       cancelButtonText: '아니오',
@@ -52,7 +56,7 @@ const Main = ({ userId }: { userId: string | null }) => {
     if (filteredCompany!.length > 0) {
       Swal.fire({
         icon: 'error',
-        text: `${company} 은/는 이미 넣은 회사입니다!`,
+        text: `"${company}" 은/는 이미 넣은 회사입니다!`,
       });
       return;
     }
@@ -78,7 +82,9 @@ const Main = ({ userId }: { userId: string | null }) => {
   return (
     <>
       <StMainWrapper>
-        <StButton onClick={logOutHandler}>로그아웃</StButton>
+        <StButtonBox>
+          <StButton onClick={logOutHandler}>로그아웃</StButton>
+        </StButtonBox>
         <h1>
           내가 여기 넣었나?
           <span>
@@ -129,7 +135,12 @@ const StButton = styled.button`
   font-size: 20px;
   cursor: pointer;
   margin: 10px;
+  opacity: 0.6;
 
+  &:hover {
+    opacity: 1;
+    transition: 0.2s;
+  }
   @media screen and (max-width: 768px) {
     color: aliceblue;
     width: 120px;
@@ -141,6 +152,7 @@ const StMainWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  user-select: none;
 
   h1 {
     font-size: 100px;
@@ -207,5 +219,16 @@ const StMainWrapper = styled.div`
         margin-right: 20px;
       }
     }
+  }
+`;
+
+const StButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  @media screen and (max-width: 768px) {
+    color: aliceblue;
+    width: 80%;
   }
 `;
