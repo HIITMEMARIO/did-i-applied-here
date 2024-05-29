@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { useHandleCompany } from '../hooks/useHandleCompany';
 import { RootState } from '../redux/config/configStore';
 import { useSelector } from 'react-redux';
+import Button from './UI/Button';
 
 interface CardProps {
   company: string;
@@ -32,10 +33,14 @@ const Cards = ({ company, id, platform, created_at }: CardProps) => {
 
   return (
     <StCardWrapper>
-      <div>{company}</div>
-      <div>{platform}</div>
-      <div>{created_at}</div>
-      <StButton onClick={handleDelete}>지원취소</StButton>
+      <h3>{company}</h3>
+      <StContentBox>
+        <span>{platform}</span>
+        <span>{created_at}</span>
+      </StContentBox>
+      <Button variant="primary" onClick={handleDelete}>
+        지원취소
+      </Button>
     </StCardWrapper>
   );
 };
@@ -45,42 +50,29 @@ export default Cards;
 const StCardWrapper = styled.div`
   width: 300px;
   background-color: #9cb4d4;
-  height: 100px;
+  height: 180px;
   margin: 15px;
   display: flex;
-  align-items: center;
-  padding-left: 20px;
+  justify-content: center;
   border-radius: 20px;
   font-size: 18px;
   position: relative;
   word-break: break-all;
+  flex-direction: column;
+  align-items: center;
 
-  div {
-    width: 150px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  @media screen and (max-width: 768px) {
+  h3 {
+    height: 40px;
+    font-size: 30px;
+    margin: 30px;
   }
 `;
 
-const StButton = styled.button`
-  width: 100px;
-  height: 50px;
-  border-radius: 20px;
-  border: none;
-  background-color: aliceblue;
-  font-size: 20px;
-  cursor: pointer;
-  margin: 10px;
-
-  @media screen and (max-width: 768px) {
-    color: aliceblue;
-    width: 120px;
-    background-color: aliceblue;
-    color: black;
-  }
+const StContentBox = styled.div`
+  display: flex;
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
 `;
