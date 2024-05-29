@@ -7,9 +7,11 @@ import { useSelector } from 'react-redux';
 interface CardProps {
   company: string;
   id: string;
+  platform: string;
+  created_at: string;
 }
 
-const Cards = ({ company, id }: CardProps) => {
+const Cards = ({ company, id, platform, created_at }: CardProps) => {
   const { userId } = useSelector((state: RootState) => state.auth);
   const { deleteCompanymutation } = useHandleCompany({ company, userId });
 
@@ -26,10 +28,13 @@ const Cards = ({ company, id }: CardProps) => {
       }
     });
   };
+  console.log(created_at);
 
   return (
     <StCardWrapper>
       <div>{company}</div>
+      <div>{platform}</div>
+      <div>{created_at}</div>
       <StButton onClick={handleDelete}>지원취소</StButton>
     </StCardWrapper>
   );
