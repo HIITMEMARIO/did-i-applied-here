@@ -5,7 +5,12 @@ import { addDataDataType } from '../types/addDataType';
 export const addCompany = async (newCompany: addDataDataType) => {
   const { error } = await supabase
     .from('companies')
-    .insert({ id: newCompany.id, company: newCompany.company })
+    .insert({
+      id: newCompany.id,
+      company: newCompany.company,
+      platform: newCompany.platform,
+      created_at: newCompany.created_at,
+    })
     .select();
   if (error) {
     throw new Error('error');

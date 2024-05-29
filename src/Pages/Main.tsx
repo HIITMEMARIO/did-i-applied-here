@@ -1,29 +1,43 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { addDataDataType } from '../types/addDataType';
-import { v4 as uuidv4 } from 'uuid';
-import { useHandleCompany } from '../hooks/useHandleCompany';
-import Swal from 'sweetalert2';
-import { signOut } from '../api/auth';
-import { useNavigate } from 'react-router-dom';
-import Cards from '../components/Cards';
-import { logOutUser } from '../redux/modules/authSlice';
-import { useDispatch } from 'react-redux';
+import { useState } from "react";
+import styled from "styled-components";
+import { addDataDataType } from "../types/addDataType";
+import { v4 as uuidv4 } from "uuid";
+import { useHandleCompany } from "../hooks/useHandleCompany";
+import Swal from "sweetalert2";
+import { signOut } from "../api/auth";
+import { useNavigate } from "react-router-dom";
+import Cards from "../components/Cards";
+import { logOutUser } from "../redux/modules/authSlice";
+import { useDispatch } from "react-redux";
+import { selectValue } from "../utils/selectValue";
+import dayjs from "dayjs";
+import Button from "../components/UI/Button";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 const Main = ({ userId }: { userId: string | null }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const logOutHandler = () => {
-    signOut();
-    dispatch(logOutUser());
-    navigate('/login');
-  };
-  const [company, setCompany] = useState<string>('');
+  const [company, setCompany] = useState<string>("");
+  const [platform, setPlatform] = useState<string>("원티드");
+  console.log(platform);
   const { addCompanymutation, user } = useHandleCompany({
     company,
     userId,
   });
+
+  const logOutHandler = () => {
+    signOut();
+    dispatch(logOutUser());
+    navigate("/login");
+  };
+
   const companyHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCompany(e.target.value);
   };
@@ -31,51 +45,55 @@ const Main = ({ userId }: { userId: string | null }) => {
   const filteredCompany = user?.filter((i) => {
     return i.company === company;
   });
+
   const success = ({ newCompany }: { newCompany: addDataDataType }) => {
     Swal.fire({
-      icon: 'question',
+      icon: "question",
       text: `"${newCompany.company}" 로 등록하시겠습니까?`,
       showCancelButton: true,
-      confirmButtonText: '예',
-      cancelButtonText: '아니오',
+      confirmButtonText: "예",
+      cancelButtonText: "아니오",
     }).then((result) => {
       if (result.isConfirmed) {
         addCompanymutation.mutate(newCompany);
       } else if (result.isDismissed) {
-        setCompany('');
+        setCompany("");
       }
     });
   };
-
+  // dayjs.locale('ko');
+  console.log();
   const addCompany = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newCompany: addDataDataType = {
       id: uuidv4(),
       company,
+      platform,
+      created_at: dayjs(new Date()).format("YYYY년MM월DD일"),
     };
     if (filteredCompany!.length > 0) {
       Swal.fire({
-        icon: 'error',
+        icon: "error",
         text: `"${company}" 은/는 이미 넣은 회사입니다!`,
       });
       return;
     }
     if (company.length >= 20) {
       Swal.fire({
-        icon: 'warning',
-        text: '회사명은 최대 20글자까지 입력 가능합니다!',
+        icon: "warning",
+        text: "회사명은 최대 20글자까지 입력 가능합니다!",
       });
-      setCompany('');
+      setCompany("");
       return;
     }
     if (!company.length) {
       Swal.fire({
-        icon: 'warning',
-        text: '회사명을 넣어주세요!',
+        icon: "warning",
+        text: "회사명을 넣어주세요!",
       });
     } else {
       success({ newCompany });
-      setCompany('');
+      setCompany("");
     }
   };
 
@@ -83,7 +101,9 @@ const Main = ({ userId }: { userId: string | null }) => {
     <>
       <StMainWrapper>
         <StButtonBox>
-          <StButton onClick={logOutHandler}>로그아웃</StButton>
+          <Button variant="primary" onClick={logOutHandler}>
+            로그아웃
+          </Button>
         </StButtonBox>
         <h1>
           내가 여기 넣었나?
@@ -100,11 +120,40 @@ const Main = ({ userId }: { userId: string | null }) => {
             value={company}
             onChange={companyHandler}
           />
+          <Box>
+            <FormControl>
+              <InputLabel id="select-label">플랫폼</InputLabel>
+
+              <Select
+                labelId="select-label"
+                // id="demo-simple-select"
+                value={platform}
+                onChange={(e: SelectChangeEvent) => {
+                  setPlatform(e.target.value);
+                }}
+              >
+                {selectValue.map((city) => (
+                  <MenuItem key={city.key} value={city.value}>
+                    {city.value}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
           <StButton type="submit">등록하기</StButton>
         </form>
         <StCardWrapper>
           {user?.map((i) => {
-            return <Cards key={i.id} company={i.company} id={i.id} />;
+            console.log(i);
+            return (
+              <Cards
+                key={i.id}
+                company={i.company}
+                id={i.id}
+                platform={i.platform}
+                created_at={i.created_at}
+              />
+            );
           })}
         </StCardWrapper>
       </StMainWrapper>
@@ -229,6 +278,9 @@ const StButtonBox = styled.div`
 
   @media screen and (max-width: 768px) {
     color: aliceblue;
-    width: 80%;
   }
 `;
+
+// const StBox = styled.div`
+//   background-color: red;
+// `;
