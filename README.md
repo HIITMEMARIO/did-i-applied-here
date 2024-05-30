@@ -1,32 +1,8 @@
-# React + TypeScript + Vite
+# Did-I-Applied-Here?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 개요
 
-Currently, two official plugins are available:
+- 취업준비를 하다보면 여러 채용사이트를 사용하게 됩니다. 그러나 각 채용사이트마다 지원회사가 공유되지 않기때문에
+  직접 정리해 줄 필요가 있습니다. 메모장에 정리할 수도 있지만 조금 이라도 수고를 덜기위해 따로 간단한 웹 서비스를 만들게 되었습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# did-i-applied-here
-# did-i-applied-here
+## 사용법

@@ -20,7 +20,6 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-// import Test from "../components/Test";
 
 const Main = ({ userId }: { userId: string | null }) => {
   const dispatch = useDispatch();
@@ -32,13 +31,13 @@ const Main = ({ userId }: { userId: string | null }) => {
     company,
     userId,
   });
-  console.log(user?.length);
+
   const logOutHandler = () => {
     signOut();
     dispatch(logOutUser());
     navigate("/login");
   };
-  console.log(user);
+
   const companyHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCompany(e.target.value);
   };
@@ -62,8 +61,6 @@ const Main = ({ userId }: { userId: string | null }) => {
       }
     });
   };
-  // dayjs.locale('ko');
-  console.log();
   const addCompany = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newCompany: addDataDataType = {

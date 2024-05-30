@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import Swal from 'sweetalert2';
-import { useHandleCompany } from '../hooks/useHandleCompany';
-import { RootState } from '../redux/config/configStore';
-import { useSelector } from 'react-redux';
-import Button from './UI/Button';
+import styled from "styled-components";
+import Swal from "sweetalert2";
+import { useHandleCompany } from "../hooks/useHandleCompany";
+import { RootState } from "../redux/config/configStore";
+import { useSelector } from "react-redux";
+import Button from "./UI/Button";
 
 interface CardProps {
   company: string;
@@ -18,18 +18,17 @@ const Cards = ({ company, id, platform, created_at }: CardProps) => {
 
   const handleDelete = () => {
     Swal.fire({
-      icon: 'question',
+      icon: "question",
       text: `${company}의 지원을 취소하실건가요?`,
       showCancelButton: true,
-      confirmButtonText: '예',
-      cancelButtonText: '아니오',
+      confirmButtonText: "예",
+      cancelButtonText: "아니오",
     }).then((result) => {
       if (result.isConfirmed) {
         deleteCompanymutation.mutate(id);
       }
     });
   };
-  console.log(created_at);
 
   return (
     <StCardWrapper>
