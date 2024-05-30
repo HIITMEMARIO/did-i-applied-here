@@ -22,6 +22,12 @@
 
 ![스크린샷 2024-05-30 시간: 13 00 25](https://github.com/HIITMEMARIO/did-i-applied-here/assets/135943045/e380bc56-a221-4ca4-9792-d711d8f72ca7)
 
+#### 모바일 환경도 지원하고 있습니다!
+
+![스크린샷 2024-05-30 시간: 13 07 50](https://github.com/HIITMEMARIO/did-i-applied-here/assets/135943045/c99cddd7-07ad-4b7f-a43e-4d316c8c3bb7)
+
+![스크린샷 2024-05-30 시간: 13 08 07](https://github.com/HIITMEMARIO/did-i-applied-here/assets/135943045/087188cc-6039-46e6-970a-0faa0b79397d)
+
 ## 폴더 구조
 
 ```
