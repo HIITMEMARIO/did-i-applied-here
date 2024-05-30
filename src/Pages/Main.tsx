@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { addDataDataType } from '../types/addDataType';
-import { v4 as uuidv4 } from 'uuid';
-import { useHandleCompany } from '../hooks/useHandleCompany';
-import Swal from 'sweetalert2';
-import { signOut } from '../api/auth';
-import { useNavigate } from 'react-router-dom';
-import Cards from '../components/Cards';
-import { logOutUser } from '../redux/modules/authSlice';
-import { useDispatch } from 'react-redux';
-import { selectValue } from '../utils/selectValue';
-import dayjs from 'dayjs';
-import Button from '../components/UI/Button';
+import { useState } from "react";
+import styled from "styled-components";
+import { addDataDataType } from "../types/addDataType";
+import { v4 as uuidv4 } from "uuid";
+import { useHandleCompany } from "../hooks/useHandleCompany";
+import Swal from "sweetalert2";
+import { signOut } from "../api/auth";
+import { useNavigate } from "react-router-dom";
+import Cards from "../components/Cards";
+import { logOutUser } from "../redux/modules/authSlice";
+import { useDispatch } from "react-redux";
+import { selectValue } from "../utils/selectValue";
+import dayjs from "dayjs";
+import Button from "../components/UI/Button";
 import {
   Box,
   FormControl,
@@ -19,13 +19,14 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-} from '@mui/material';
+} from "@mui/material";
+// import Test from "../components/Test";
 
 const Main = ({ userId }: { userId: string | null }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [company, setCompany] = useState<string>('');
-  const [platform, setPlatform] = useState<string>('원티드');
+  const [company, setCompany] = useState<string>("");
+  const [platform, setPlatform] = useState<string>("원티드");
 
   const { addCompanymutation, user } = useHandleCompany({
     company,
@@ -35,7 +36,7 @@ const Main = ({ userId }: { userId: string | null }) => {
   const logOutHandler = () => {
     signOut();
     dispatch(logOutUser());
-    navigate('/login');
+    navigate("/login");
   };
   console.log(user);
   const companyHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,16 +49,16 @@ const Main = ({ userId }: { userId: string | null }) => {
 
   const success = ({ newCompany }: { newCompany: addDataDataType }) => {
     Swal.fire({
-      icon: 'question',
+      icon: "question",
       text: `"${newCompany.company}" 로 등록하시겠습니까?`,
       showCancelButton: true,
-      confirmButtonText: '예',
-      cancelButtonText: '아니오',
+      confirmButtonText: "예",
+      cancelButtonText: "아니오",
     }).then((result) => {
       if (result.isConfirmed) {
         addCompanymutation.mutate(newCompany);
       } else if (result.isDismissed) {
-        setCompany('');
+        setCompany("");
       }
     });
   };
@@ -69,31 +70,31 @@ const Main = ({ userId }: { userId: string | null }) => {
       id: uuidv4(),
       company,
       platform,
-      created_at: dayjs(new Date()).format('YYYY년MM월DD일'),
+      created_at: dayjs(new Date()).format("YYYY년MM월DD일"),
     };
     if (filteredCompany!.length > 0) {
       Swal.fire({
-        icon: 'error',
+        icon: "error",
         text: `"${company}" 은/는 이미 넣은 회사입니다!`,
       });
       return;
     }
-    if (company.length >= 20) {
+    if (company.length >= 17) {
       Swal.fire({
-        icon: 'warning',
-        text: '회사명은 최대 20글자까지 입력 가능합니다!',
+        icon: "warning",
+        text: "회사명은 최대 16글자까지 입력 가능합니다!",
       });
-      setCompany('');
+      setCompany("");
       return;
     }
     if (!company.length) {
       Swal.fire({
-        icon: 'warning',
-        text: '회사명을 넣어주세요!',
+        icon: "warning",
+        text: "회사명을 넣어주세요!",
       });
     } else {
       success({ newCompany });
-      setCompany('');
+      setCompany("");
     }
   };
 
@@ -122,9 +123,9 @@ const Main = ({ userId }: { userId: string | null }) => {
               onChange={companyHandler}
             />
             <Box>
-              <FormControl sx={{ width: '130px' }}>
+              <FormControl sx={{ width: "130px" }}>
                 <InputLabel
-                  sx={{ backgroundColor: '#e9f2eb' }}
+                  sx={{ backgroundColor: "#e9f2eb" }}
                   id="select-label"
                 >
                   플랫폼
@@ -148,15 +149,12 @@ const Main = ({ userId }: { userId: string | null }) => {
             <StButton type="submit">등록하기</StButton>
           </StInputBox>
         </form>
-
-        {user?.length === 0 ? (
-          <StNoCardBox>
+        <StCardWrapper>
+          {user?.length === 0 ? (
             <h2>지원 목록이 없어요ㅠㅠ</h2>
-          </StNoCardBox>
-        ) : (
-          user?.map((i) => {
-            return (
-              <StCardWrapper>
+          ) : (
+            user?.map((i) => {
+              return (
                 <Cards
                   key={i.id}
                   company={i.company}
@@ -164,10 +162,10 @@ const Main = ({ userId }: { userId: string | null }) => {
                   platform={i.platform}
                   created_at={i.created_at}
                 />
-              </StCardWrapper>
-            );
-          })
-        )}
+              );
+            })
+          )}
+        </StCardWrapper>
       </StMainWrapper>
     </>
   );
@@ -181,6 +179,13 @@ const StCardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 30px;
+  margin: 30px;
+
+  & > h2 {
+    width: 100%;
+    grid-column-start: 2;
+  }
+
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
     place-items: center;
@@ -266,7 +271,6 @@ const StMainWrapper = styled.div`
       align-items: center;
 
       input {
-        /* width: 200px; */
         margin-right: 0px;
       }
     }
@@ -293,16 +297,5 @@ const StInputBox = styled.div`
     height: 15em;
     justify-content: space-around;
     margin-right: 0;
-  }
-`;
-
-const StNoCardBox = styled.div`
-  background-color: #4f7670;
-  border-radius: 20px;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-
-  @media screen and (max-width: 768px) {
-    place-items: center;
   }
 `;
