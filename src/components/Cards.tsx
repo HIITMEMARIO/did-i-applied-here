@@ -53,7 +53,7 @@ const StCardWrapper = styled.div`
   margin: 15px;
   display: flex;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 5px;
   font-size: 18px;
   position: relative;
   word-break: break-all;

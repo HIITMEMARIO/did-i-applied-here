@@ -1,9 +1,9 @@
-import { ComponentProps, PropsWithChildren } from 'react';
-import styled, { css } from 'styled-components';
+import { ComponentProps, PropsWithChildren } from "react";
+import styled, { css } from "styled-components";
 
-interface ButtonProps extends ComponentProps<'button'> {
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
+interface ButtonProps extends ComponentProps<"button"> {
+  variant?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg";
   rounded?: boolean;
 }
 
@@ -24,7 +24,7 @@ const Button = ({
 export default Button;
 
 const StButton = styled.button<ButtonProps>`
-  border-radius: ${({ rounded }) => (rounded ? '20px' : '')};
+  border-radius: ${({ rounded }) => (rounded ? "10px" : "")};
   background-color: #9cb4d4;
   font-size: 20px;
   cursor: pointer;
@@ -35,7 +35,7 @@ const StButton = styled.button<ButtonProps>`
 
   ${({ variant }) => {
     switch (variant) {
-      case 'primary':
+      case "primary":
         return css`
           background-color: #9cb4d4;
           font-size: 20px;
@@ -45,9 +45,9 @@ const StButton = styled.button<ButtonProps>`
           border: none;
           height: 45px;
           width: 140px;
-          border-radius: 20px;
+          border-radius: 10px;
         `;
-      case 'secondary':
+      case "secondary":
         return css`
           background-color: #fcba03;
           font-size: 20px;
@@ -57,24 +57,24 @@ const StButton = styled.button<ButtonProps>`
           border: none;
           height: 40px;
           width: 100px;
-          border-radius: 20px;
+          border-radius: 10px;
         `;
     }
   }}
 
   ${({ size }) => {
     switch (size) {
-      case 'lg':
+      case "lg":
         return css`
           height: 50px;
           width: 200px;
         `;
-      case 'md':
+      case "md":
         return css`
           height: 45px;
           width: 130px;
         `;
-      case 'sm':
+      case "sm":
         return css`
           height: 40px;
           width: 100px;

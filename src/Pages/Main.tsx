@@ -172,7 +172,7 @@ export default Main;
 
 const StCardWrapper = styled.div`
   background-color: #4f7670;
-  border-radius: 20px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 30px;
@@ -192,7 +192,7 @@ const StCardWrapper = styled.div`
 const StButton = styled.button`
   width: 100px;
   height: 50px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: none;
   background-color: #9cb4d4;
   font-size: 20px;
@@ -242,7 +242,7 @@ const StMainWrapper = styled.div`
   input {
     padding: 20px;
     width: 300px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
     margin-right: 20px;
   }
